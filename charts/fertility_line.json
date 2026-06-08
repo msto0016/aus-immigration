@@ -1,0 +1,214 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "background": "#F7EFEA",
+  "width": 600,
+  "height": 320,
+
+  "title": {
+    "text": "Australia's Total Fertility Rate, 1924–2024",
+    "font": "Montserrat",
+    "fontSize": 18,
+    "color": "#333",
+    "anchor": "start"
+  },
+
+  "config": {
+    "axis": {
+      "labelFont": "Rubik",
+      "titleFont": "Rubik",
+      "labelFontSize": 12,
+      "titleFontSize": 14,
+      "gridColor": "#D9D0CA"
+    },
+    "legend": {
+      "labelFont": "Rubik",
+      "titleFont": "Rubik"
+    }
+  },
+
+  "layer": [
+
+    {
+      "data": {
+        "values": [
+          { "start": 1929, "end": 1939, "event": "Great Depression" },
+          { "start": 1939, "end": 1945, "event": "World War II" },
+          { "start": 1946, "end": 1964, "event": "Baby Boom" },
+          { "start": 2020, "end": 2022, "event": "COVID-19" }
+        ]
+      },
+      "mark": {
+        "type": "rect",
+        "opacity": 0.5
+      },
+      "encoding": {
+        "x": {
+          "field": "start",
+          "type": "quantitative",
+          "scale": { "domain": [1924, 2024] }
+        },
+        "x2": { "field": "end" },
+        "color": {
+          "field": "event",
+          "legend": { "title": "Historical Periods" }
+        }
+      }
+    },
+
+    {
+      "data": {
+        "url": "data/fertility_rate.csv"
+      },
+      "mark": {
+        "type": "line",
+        "color": "#333"
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "quantitative",
+          "title": "Year",
+          "scale": { "domain": [1924, 2024] },
+          "axis": {
+            "format": "d",
+            "values": [1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020]
+          }
+        },
+        "y": {
+          "field": "Total fertility rate",
+          "type": "quantitative",
+          "title": "Total fertility rate",
+          "scale": { "domain": [1.4, 3.7] }
+        },
+        "tooltip": [
+          { "field": "Year" },
+          { "field": "Total fertility rate", "format": ".3f" }
+        ]
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          { "x": 1924, "y": 2.1 },
+          { "x": 2024, "y": 2.1 }
+        ]
+      },
+      "mark": {
+        "type": "line",
+        "strokeDash": [6, 4],
+        "color": "#666"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": { "domain": [1924, 2024] }
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": { "domain": [1.4, 3.7] }
+        }
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "label": "Replacement level (2.1)",
+            "x": 2008,
+            "y": 2.1
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 6,
+        "dy": -6,
+        "font": "Rubik",
+        "fontSize": 12,
+        "color": "#666"
+      },
+      "encoding": {
+        "x": { "field": "x", "type": "quantitative" },
+        "y": { "field": "y", "type": "quantitative" },
+        "text": { "field": "label" }
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          { "Year": 1933, "Total fertility rate": 2.166 },
+          { "Year": 1961, "Total fertility rate": 3.548 },
+          { "Year": 1975, "Total fertility rate": 2.148 },
+          { "Year": 2020, "Total fertility rate": 1.593 },
+          { "Year": 2024, "Total fertility rate": 1.481 }
+        ]
+      },
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 100,
+        "color": "#333"
+      },
+      "encoding": {
+        "x": { "field": "Year", "type": "quantitative" },
+        "y": { "field": "Total fertility rate", "type": "quantitative" }
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "Year": 1933,
+            "Total fertility rate": 2.166,
+            "label": "Great Depression\nfertility low"
+          },
+          {
+            "Year": 1961,
+            "Total fertility rate": 3.548,
+            "label": "Baby Boom peak"
+          },
+          {
+            "Year": 1975,
+            "Total fertility rate": 2.148,
+            "label": "Post-pill decline"
+          },
+          {
+            "Year": 2020,
+            "Total fertility rate": 1.593,
+            "label": "COVID-19"
+          },
+          {
+            "Year": 2024,
+            "Total fertility rate": 1.481,
+            "label": "Record low"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "Rubik",
+        "fontSize": 12,
+        "align": "left",
+        "baseline": "middle",
+        "dx": 8,
+        "dy": -13,
+        "color": "#333333"
+      },
+      "encoding": {
+        "x": { "field": "Year", "type": "quantitative" },
+        "y": { "field": "Total fertility rate", "type": "quantitative" },
+        "text": { "field": "label" }
+      }
+    }
+
+  ]
+}

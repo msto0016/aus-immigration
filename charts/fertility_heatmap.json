@@ -1,0 +1,120 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "background": "#F7EFEA",
+  "width": 280,
+  "height": 240,
+
+
+  "title": {
+    "text": "Age-Specific Fertility Rates in Australia (1924–2024)",
+    "font": "Montserrat",
+    "fontSize": 18,
+    "anchor": "start",
+    "color": "#333"
+  },
+
+  "data": {
+    "url": "data/fertility_rate_5yr.csv"
+  },
+
+  "transform": [
+    {
+  "filter": "datum.Year % 5 == 0"
+},
+    {
+      "fold": [
+        "15-19",
+        "20-24",
+        "25-29",
+        "30-34",
+        "35-39",
+        "40-44",
+        "45-49"
+      ],
+      "as": ["Age Group", "Rate"]
+    }
+  ],
+
+  "mark": "rect",
+
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year",
+      "axis": {
+        "labelAngle": 0,
+        "labelFont": "Rubik",
+        "titleFont": "Rubik",
+        "values": [
+          1925,
+          1935,
+          1945,
+          1955,
+          1965,
+          1975,
+          1985,
+          1995,
+          2005,
+          2015,
+          2024
+        ]
+      }
+    },
+
+    "y": {
+      "field": "Age Group",
+      "type": "ordinal",
+      "title": "Age Group",
+      "sort": [
+        "45-49",
+        "40-44",
+        "35-39",
+        "30-34",
+        "25-29",
+        "20-24",
+        "15-19"
+      ],
+      "axis": {
+        "labelFont": "Rubik",
+        "titleFont": "Rubik"
+      }
+    },
+
+    "color": {
+      "field": "Rate",
+      "type": "quantitative",
+      "title": "Births per 1,000 Women",
+      "scale": {
+        "scheme": "reds"
+      },
+      "legend": {
+        "labelFont": "Rubik",
+        "titleFont": "Rubik"
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "Year"
+      },
+      {
+        "field": "Age Group"
+      },
+      {
+        "field": "Rate",
+        "format": ".1f"
+      }
+    ]
+  },
+
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "grid": false
+    }
+  }
+}
