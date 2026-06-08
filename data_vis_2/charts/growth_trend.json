@@ -1,0 +1,103 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "Quarterly Population Growth",
+    "font": "Montserrat",
+    "fontSize": 18,
+    "color": "#333",
+    "anchor": "start"
+  },
+
+  "background": "#F7EFEA",
+  "width": 480,
+
+  "config": {
+    "font": "Rubik",
+    "axis": {
+      "labelFont": "Rubik",
+      "titleFont": "Montserrat",
+      "labelColor": "#333",
+      "titleColor": "#333"
+    },
+    "legend": {
+      "labelFont": "Rubik",
+      "titleFont": "Montserrat",
+      "orient": "bottom"
+    }
+  },
+
+  "data": {
+    "url": "data/pop_growth.csv",
+    "format": {
+      "type": "csv",
+      "parse": { "Quarter": "date:%d/%m/%Y" }
+    }
+  },
+
+  "transform": [
+    {
+      "fold": [
+        "Total growth",
+        "Natural increase",
+        "Net overseas migration"
+      ],
+      "as": ["component", "value"]
+    }
+  ],
+
+  "layer": [
+
+    {
+      "mark": { "type": "line", "interpolate": "monotone", "strokeWidth": 2 },
+      "encoding": {
+        "x": {
+          "field": "Quarter",
+          "type": "temporal",
+          "title": "Quarter",
+          "axis": { "format": "%b %y", "labelAngle": -45 }
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "Population change"
+        },
+        "color": {
+          "field": "component",
+          "type": "nominal",
+          "title": "Component",
+          "scale": {
+            "domain": [
+              "Total growth",
+              "Natural increase",
+              "Net overseas migration"
+            ]
+          }
+        },
+        "tooltip": [
+          { "field": "Quarter", "type": "temporal", "title": "Quarter", "format": "%b %y" },
+          { "field": "component", "title": "Component" },
+          { "field": "value", "title": "Value", "format": "," }
+        ]
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "font": "Rubik",
+        "fontWeight": 300,
+        "fontSize": 11,
+        "opacity": 0.8,
+        "color": "#333",
+        "lineBreak": "\n"
+      },
+      "encoding": {
+        "x": { "datum": { "year": 2019, "month": 12, "date": 1 }, "type": "temporal" },
+        "y": { "datum": 450000, "type": "quantitative" },
+        "text": { "value": "COVID border closures\n→ NOM collapse" }
+      }
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "Overseas-Born Population Share (1891–2025)",
+    "font": "Montserrat",
+    "fontSize": 18,
+    "color": "#333",
+    "anchor": "start"
+  },
+
+  "background": "#F7EFEA",
+  "width": 480,
+  "height": 320,
+
+
+  "config": {
+    "font": "Rubik",
+    "axis": {
+      "labelFont": "Rubik",
+      "titleFont": "Montserrat",
+      "labelColor": "#333",
+      "titleColor": "#333"
+    },
+    "legend": {
+      "labelFont": "Rubik",
+      "titleFont": "Montserrat",
+      "orient": "bottom"
+    }
+  },
+
+  "data": {
+    "url": "data/overseas_born.csv"
+  },
+
+  "resolve": {
+    "scale": {
+      "y": "independent"
+    }
+  },
+
+  "layer": [
+
+    {
+      "transform": [
+        {
+          "fold": [
+            "Number of Australian-born",
+            "Number of overseas-born"
+          ],
+          "as": ["Type", "Millions"]
+        }
+      ],
+
+      "mark": {
+        "type": "bar",
+        "size": 3
+      },
+
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "quantitative",
+          "axis": {
+            "format": "d"
+          },
+          "scale": {
+            "domain": [1891, 2025]
+          }
+        },
+
+        "y": {
+          "field": "Millions",
+          "type": "quantitative",
+          "title": "Population (millions)",
+          "scale": {
+            "domain": [0, 35]
+          }
+        },
+
+        "color": {
+          "field": "Type",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Number of Australian-born",
+              "Number of overseas-born"
+            ],
+            "range": ["#76b7b2", "#59a14f"]
+          }
+        }
+      }
+    },
+
+    {
+      "mark": {
+        "type": "line",
+        "color": "#e15759",
+        "strokeWidth": 2,
+        "zindex": 10
+      },
+
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "quantitative",
+          "axis": {
+            "format": "d"
+          },
+          "scale": {
+            "domain": [1891, 2025]
+          }
+        },
+
+        "y": {
+          "field": "Proportion of overseas-born (%)",
+          "type": "quantitative",
+          "title": "Overseas-born share (%)",
+          "scale": {
+            "domain": [0, 35]
+          }
+        }
+      }
+    }
+
+  ]
+}

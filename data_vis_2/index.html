@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Australia's Need for Immigration</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+
+<body>
+
+<h1>Australia's Need for Immigration</h1>
+
+<!-- ============================================================
+     1. AUSTRALIA IS AGEING FASTER THAN EVER
+============================================================ -->
+<h2>Australia is ageing faster than ever</h2>
+
+<div class="section-block">
+
+    <div class="two-col">
+
+        <div class="col">
+            <div id="stackedGrowth" class="small-chart"></div>
+            <div id="pyramid" class="small-chart"></div>
+        </div>
+
+        <div class="col">
+            <p>Australia’s population is undergoing a significant demographic transformation. People are living longer than at any point in our history, while birth rates continue to fall. As shown in the population pyramids, the age structure that once resembled a classic pyramid, with many children, fewer adults, and very few older people, has reshaped into a more rectangular, top‑heavy form.</p>
+        <p>More than 22% of Australians are now aged 65 and over, and this number is projected to exceed 4.5 million in the coming decades. This shift places growing pressure on systems that depend on a balanced age mix, including healthcare, aged care, the workforce, and housing.</p>        </div>
+
+    </div>
+
+</div>
+
+<!-- ============================================================
+     2. WORKFORCE SHRINKING
+============================================================ -->
+<h2>The workforce is shrinking relative to retirees</h2>
+
+<div class="section-block">
+
+    <div class="two-col">
+
+        <div class="col">
+            <div id="retireesWorkforce" class="small-chart"></div>
+        </div>
+
+        <div class="col">
+            <p>As the population ages, the number of Australians in the labour force is struggling to keep pace with the rising number of retirees. Although employment has increased, retirees have grown faster, pushing the support ratio downward.</p>
+
+            <p>With more people leaving the workforce and fewer entering it, Australia faces labour and skills shortages, reduced economic dynamism, and increased fiscal pressure. Older Australians typically require more healthcare and support services, meaning demand is rising just as the pool of workers who fund and staff these systems is shrinking.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ============================================================
+     3. FERTILITY DECLINE
+============================================================ -->
+<h2>Births alone cannot sustain population growth</h2>
+
+<div class="section-block">
+
+    <div class="chart-centre big-chart">
+        <div id="fertility"></div>
+    </div>
+
+    <div class="two-col">
+
+        <div class="col">
+            <div id="heatmap" class="small-chart"></div>
+        </div>
+
+        <div class="col">
+            <p>Australia’s fertility rate has been declining for decades. Fertility has shifted, once concentrated among women aged 20-29, is now highest among those aged 30-39. This reflects people are choosing to have children later in life, often prioritising higher education or careers. </p>
+        <p>Many are also choosing to have smaller families due to cost‑of‑living pressures, housing shortages and affordability, climate concerns, and shifting cultural norms. Greater accessibility to contraception has also influenced birth rates. </p>
+        <p>Fertility has remained below replacement level since the 1970s and reached a record low during COVID‑19, suggesting births alone are not capable of maintaining population stability.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ============================================================
+     4. IMMIGRATION DRIVES GROWTH
+============================================================ -->
+<h2>Immigration is now the primary driver of population growth</h2>
+
+<div class="section-block">
+
+    <div class="two-col">
+
+        <div class="col">
+            <div id="popComponents" class="small-chart"></div>
+            <div id="overseasBorn" class="small-chart"></div>
+        </div>
+
+        <div class="col">
+            <div id="lollipop" class="small-chart"></div>
+
+            <p>Migration has long shaped Australia’s population. Today, <strong>8.8 million people</strong>, or <strong>32% of the population</strong>, were born overseas.</p>
+
+            <p>In recent decades, net overseas migration (NOM) has become the dominant contributor to population growth, while natural increase (births minus deaths) shows a downward trend.</p>
+        
+            <p>The COVID‑19 border closures were a stark reminder of the influence of migration on population growth. When migration was halted, population growth fell sharply, and labour shortages intensified. After borders reopened in 2022, NOM surged as deferred arrivals caught up.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ============================================================
+     5. WHERE ARE PEOPLE MIGRATING FROM?
+============================================================ -->
+<h2>Where are people migrating from?</h2>
+
+<div class="section-block">
+
+    <div class="chart-centre big-chart">
+        <div id="flowmap"></div>
+    </div>
+
+    <div class="two-col">
+
+        <div class="col">
+            <div id="bump_chart" class="small-chart"></div>
+        </div>
+
+        <div class="col">
+            <p>Australia’s migrant intake is diverse and continually evolving. Of the 8.83 million overseas born residents, 971,020 were born in India, a number that has grown rapidly over the past four years. </p>
+        <p>The flow map illustrates the top ten countries of birth for Australia’s overseas‑born population, with India, England, and China among the leading contributors.</p>
+    <p>The bump chart shows how annual migrant arrival patterns have shifted: while the early 2010s saw strong inflows from England and New Zealand, recent years have been dominated by arrivals from India and China, reflecting changing global mobility and education pathways.</p>        </div>
+
+    </div>
+
+</div>
+
+<!-- ============================================================
+     VEGA EMBEDS
+============================================================ -->
+<script>
+    vegaEmbed('#stackedGrowth', 'charts/stacked_area_growth.json');
+    vegaEmbed('#pyramid', 'charts/pop_pyramid.json');
+    vegaEmbed('#retireesWorkforce', 'charts/retirees_employment.json');
+    vegaEmbed('#fertility', 'charts/fertility_line.json');
+    vegaEmbed('#heatmap', 'charts/fertility_heatmap.json');
+    vegaEmbed('#popComponents', 'charts/growth_trend.json');
+    vegaEmbed('#overseasBorn', 'charts/stacked_bar.json');
+    vegaEmbed('#lollipop', 'charts/lollipop.json');
+    vegaEmbed('#flowmap', 'charts/flow_map.json');
+    vegaEmbed('#bump_chart', 'charts/bump_chart.json');
+</script>
+
+</body>
+</html>

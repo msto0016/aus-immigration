@@ -1,0 +1,111 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "Top Countries of Birth for Migrant Arrivals, 2010–2025",
+    "font": "Montserrat",
+    "fontSize": 18,
+    "color": "#333",
+    "anchor": "start"
+  },
+
+  "background": "#F7EFEA",
+  "width": 300,
+
+  "config": {
+    "font": "Rubik",
+    "axis": {
+      "labelFont": "Rubik",
+      "titleFont": "Montserrat",
+      "labelColor": "#333",
+      "titleColor": "#333"
+    },
+    "legend": {
+      "labelFont": "Rubik",
+      "titleFont": "Montserrat"
+    }
+  },
+
+  "data": {"url": "data/top_countries_historic.csv"},
+
+  "transform": [
+    {
+      "calculate": "datum.Country === 'UK CIs IOM' ? 'England' : datum.Country",
+      "as": "Country"
+    },
+    {
+      "fold": [
+        "2010-11","2011-12","2012-13","2013-14","2014-15","2015-16",
+        "2016-17","2017-18","2018-19","2019-20","2020-21","2021-22",
+        "2022-23","2023-24","2024-25"
+      ],
+      "as": ["Year", "Value"]
+    },
+    {
+      "calculate": "toNumber(datum.Value)",
+      "as": "ValueNum"
+    },
+    {
+      "window": [{"op": "rank", "as": "Rank"}],
+      "sort": [{"field": "ValueNum", "order": "descending"}],
+      "groupby": ["Year"]
+    }
+  ],
+
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "axis": {"labelAngle": -45, "title": "Year"}
+    },
+    "y": {
+      "field": "Rank",
+      "type": "quantitative",
+      "scale": {"reverse": true, "domain": [1, 5]},
+      "axis": {"title": "Rank"}
+    },
+    "color": {
+      "field": "Country",
+      "type": "nominal",
+      "scale": {"scheme": "tableau10"},
+      "legend": {
+        "title": "Country of Birth",
+        "orient": "right",
+        "offset": 30
+      }
+    }
+  },
+
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "interpolate": "monotone"
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 80
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "fontSize": 10,
+        "font": "Rubik"
+      },
+      "encoding": {
+        "text": {"field": "Country"},
+        "opacity": {
+          "condition": {"test": "datum.Year === '2024-25'", "value": 1},
+          "value": 0
+        }
+      }
+    }
+  ]
+}
